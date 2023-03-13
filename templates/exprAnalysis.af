@@ -1,0 +1,9 @@
+expHunter_analysis){
+	source ~soft_bio_267/initializes/init_degenes_hunter
+	aux_var=`cat $aux_target`
+	?
+	degenes_Hunter.R -p 0.05 -m $packages -c 4 -f 1 --WGCNA_mergecutHeight 0.1 --WGCNA_min_genes_cluster 15 --WGCNA_detectcutHeight 0.995 -t $target -i $final_counts -o DEA $aux_var
+    functional_Hunter.R -f KgRDd -G MBC -A o -P 0.1 -m Human -i DEA -t E -c 10 -u expressed -o FEnr
+    #grep -w 'PREVALENT_DEG\|POSSIBLE_DEG' FEnr/hunter_results_table_annotated.txt | cut -f 1 > prevalent_degs
+    grep -w 'PREVALENT_DEG' FEnr/hunter_results_table_annotated.txt | cut -f 1 > prevalent_degs
+}
