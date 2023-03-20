@@ -7,3 +7,13 @@ expHunter_analysis){
     #grep -w 'PREVALENT_DEG\|POSSIBLE_DEG' FEnr/hunter_results_table_annotated.txt | cut -f 1 > prevalent_degs
     grep -w 'PREVALENT_DEG' FEnr/hunter_results_table_annotated.txt | cut -f 1 > prevalent_degs
 }
+
+ranker_analysis){	
+	source ~soft_bio_267/initializes/init_python
+	export PATH=/mnt/home/users/bio_267_uma/federogc/dev_py/NetAnalyzer/bin:$PATH
+	echo -e "gene\tHGNC:9115" > seed
+
+	?
+	integrate_kernels.py -i integration_mean_by_presence -t "$simKernHGNClstnpy;$simKernPPIlstnpy" -n "$simKernHGNClst;$simKernPPIlst" -o general_matrix
+	ranker.py -k general_matrix.npy -n general_matrix.lst -s seed -o results_ranked
+}
